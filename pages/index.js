@@ -2,17 +2,24 @@ import { useState, useEffect } from 'react';
 
 export default function MissionControl() {
   const [status, setStatus] = useState(null);
-  const [lastUpdate, setLastUpdate] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
+        setError(null);
         const res = await fetch('/api/status');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
+        console.log('Data loaded:', data);
         setStatus(data);
-        setLastUpdate(new Date());
       } catch (err) {
-        console.error('Failed to fetch status:', err);
+        console.error('Fetch error:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -21,12 +28,24 @@ export default function MissionControl() {
     return () => clearInterval(interval);
   }, []);
 
-  if (!status) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1C1C1C 100%)'}}>
         <div className="text-center">
           <div className="w-16 h-16 rounded-full border-4 border-red-500/30 border-t-red-500 animate-spin mx-auto mb-4"></div>
-          <p className="text-sm font-mono" style={{color: '#B8B8B8'}}>INITIALIZING MISSION CONTROL...</p>
+          <p className="text-sm font-mono" style={{color: '#B8B8B8'}}>LOADING DATA...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1C1C1C 100%)'}}>
+        <div className="text-center">
+          <p className="text-2xl mb-4">⚠️</p>
+          <p className="text-red-500 font-mono mb-4">ERROR: {error}</p>
+          <p className="text-sm" style={{color: '#717171'}}>Check browser console for details</p>
         </div>
       </div>
     );
@@ -64,13 +83,9 @@ export default function MissionControl() {
       </head>
 
       <div className="min-h-screen relative overflow-hidden" style={{background: 'linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1C1C1C 100%)'}}>
-        {/* Grain Overlay */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}}></div>
-        
-        {/* Animated Grid Lines */}
         <div className="absolute inset-0 pointer-events-none" style={{backgroundImage: 'linear-gradient(rgba(209, 45, 48, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(209, 45, 48, 0.03) 1px, transparent 1px)', backgroundSize: '50px 50px'}}></div>
 
-        {/* Header */}
         <header className="relative z-10 border-b" style={{borderColor: 'rgba(209, 45, 48, 0.2)', backgroundColor: 'rgba(10, 10, 10, 0.8)', backdropFilter: 'blur(20px)'}}>
           <div className="container mx-auto px-8 py-5">
             <div className="flex items-center justify-between">
@@ -91,18 +106,12 @@ export default function MissionControl() {
                   </span>
                   <span className="text-sm font-display tracking-wider" style={{color: '#10b981'}}>SYSTEMS ONLINE</span>
                 </div>
-                <div className="text-xs font-mono" style={{color: '#717171'}}>
-                  {lastUpdate ? `SYNC: ${lastUpdate.toLocaleTimeString('en-AU', { timeZone: 'Australia/Adelaide', hour: '2-digit', minute: '2-digit' })} ACDT` : 'INITIALIZING...'}
-                </div>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Main Content */}
         <main className="container mx-auto px-8 py-8">
-          
-          {/* ROW 1: Critical Alerts */}
           {status.critical_alerts && status.critical_alerts.length > 0 && (
             <div className="mb-8 p-6 rounded-2xl border" style={{backgroundColor: 'rgba(209, 45, 48, 0.08)', borderColor: 'rgba(209, 45, 48, 0.3)'}}>
               <div className="flex items-center gap-3 mb-5">
@@ -123,7 +132,6 @@ export default function MissionControl() {
             </div>
           )}
 
-          {/* ROW 2: Live Metrics (5 columns) */}
           <div className="grid grid-cols-5 gap-5 mb-8">
             {[
               { icon: '📋', label: 'PAR-Q Monitor', value: 'ACTIVE', sub: 'Every 5 min', color: '#10b981', glow: 'rgba(16, 185, 129, 0.3)' },
@@ -147,9 +155,7 @@ export default function MissionControl() {
             ))}
           </div>
 
-          {/* ROW 3: Main Content (2 columns - 60/40) */}
           <div className="grid grid-cols-3 gap-6 mb-8">
-            {/* LEFT: Schedule */}
             <div className="col-span-2 p-6 rounded-2xl border transition-all" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', borderColor: 'rgba(209, 45, 48, 0.2)'}}>
               <div className="flex items-center justify-between mb-6 pb-5 border-b" style={{borderColor: 'rgba(209, 45, 48, 0.2)'}}>
                 <div>
@@ -175,7 +181,6 @@ export default function MissionControl() {
               </div>
             </div>
 
-            {/* RIGHT: Hot Leads */}
             <div className="p-6 rounded-2xl border transition-all" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', borderColor: 'rgba(209, 45, 48, 0.2)'}}>
               <div className="mb-6 pb-5 border-b" style={{borderColor: 'rgba(209, 45, 48, 0.2)'}}>
                 <h3 className="text-2xl font-display tracking-wide" style={{color: '#FAFAFA'}}>🔥 HOT LEADS</h3>
@@ -198,9 +203,7 @@ export default function MissionControl() {
             </div>
           </div>
 
-          {/* ROW 4: Automation + Actions */}
           <div className="grid grid-cols-2 gap-6">
-            {/* Automation Status */}
             <div className="p-6 rounded-2xl border transition-all" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', borderColor: 'rgba(209, 45, 48, 0.2)'}}>
               <div className="mb-6 pb-5 border-b" style={{borderColor: 'rgba(209, 45, 48, 0.2)'}}>
                 <div className="flex items-center gap-3">
@@ -227,7 +230,6 @@ export default function MissionControl() {
               </div>
             </div>
 
-            {/* Quick Actions */}
             <div className="p-6 rounded-2xl border transition-all" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', borderColor: 'rgba(209, 45, 48, 0.2)'}}>
               <div className="mb-6 pb-5 border-b" style={{borderColor: 'rgba(209, 45, 48, 0.2)'}}>
                 <div className="flex items-center gap-3">
@@ -256,7 +258,6 @@ export default function MissionControl() {
           </div>
         </main>
 
-        {/* Footer */}
         <footer className="border-t py-6 mt-12" style={{borderColor: 'rgba(209, 45, 48, 0.2)', backgroundColor: 'rgba(10, 10, 10, 0.6)'}}>
           <div className="container mx-auto px-8 text-center">
             <p className="text-xs font-mono tracking-widest" style={{color: '#717171'}}>ELITE PERFORMANCE AI • MISSION CONTROL</p>
