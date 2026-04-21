@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   ELITE PERFORMANCE BRAND GUIDELINES
+   Christian Roach Fitness Coaching
+   ============================================ */
+
+:root {
+  /* Brand Colors - Dark Mode Elite */
+  --brand-deepest: #0A0A0A;
+  --brand-deep: #121212;
+  --brand-elevated: #1C1C1C;
+  
+  /* Accent Reds */
+  --brand-red-primary: #D12D30;
+  --brand-red-bright: #E13C3E;
+  --brand-red-glow: #F04C50;
+  
+  /* Text */
+  --brand-text-primary: #FAFAFA;
+  --brand-text-secondary: #B8B8B8;
+  
+  /* Effects */
+  --glow-soft: 0 0 20px rgba(240, 76, 80, 0.3);
+  --glow-strong: 0 0 40px rgba(240, 76, 80, 0.5);
+}
+
+/* Base Styles - Dark Mode */
+body {
+  background-color: var(--brand-deepest);
+  color: var(--brand-text-primary);
+  font-family: 'Inter', 'Outfit', sans-serif;
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--brand-text-primary);
+}
+
+/* Brand Textures */
+.bg-carbon-fiber {
+  background-image: url('/textures/carbon-fiber.png');
+  background-size: cover;
+}
+
+.bg-grain {
+  background-image: url('/textures/grain-overlay.png');
+  background-size: cover;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Brand Cards */
+.card-elite {
+  background: var(--brand-deep);
+  border: 1px solid rgba(209, 45, 48, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.card-elite:hover {
+  border-color: var(--brand-red-primary);
+  box-shadow: var(--glow-soft);
+}
+
+/* Brand Buttons */
+.btn-elite {
+  background: var(--brand-red-primary);
+  color: white;
+  font-family: 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-elite:hover {
+  background: var(--brand-red-bright);
+  box-shadow: var(--glow-strong);
+  transform: translateY(-2px);
+}
+
+.btn-elite:active {
+  transform: translateY(0);
+}
+
+/* Glow Effects */
+.glow-soft {
+  box-shadow: var(--glow-soft);
+}
+
+.glow-strong {
+  box-shadow: var(--glow-strong);
+}
+
+/* Text Gradients */
+.text-gradient {
+  background: linear-gradient(135deg, var(--brand-red-primary), var(--brand-red-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Border Glow */
+.border-glow {
+  border: 1px solid var(--brand-red-primary);
+  box-shadow: 0 0 10px rgba(209, 45, 48, 0.3);
+}
+
+/* Utility Classes */
+.bg-deepest { background-color: var(--brand-deepest); }
+.bg-deep { background-color: var(--brand-deep); }
+.bg-elevated { background-color: var(--brand-elevated); }
+
+.text-primary { color: var(--brand-text-primary); }
+.text-secondary { color: var(--brand-text-secondary); }
+
+.border-brand { border-color: var(--brand-red-primary); }
