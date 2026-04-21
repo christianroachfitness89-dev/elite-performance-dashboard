@@ -13,6 +13,7 @@ module.exports = {
           deepest: '#0A0A0A',    // Primary background
           deep: '#121212',       // Secondary background
           elevated: '#1C1C1C',   // Cards/Hover
+          surface: '#252525',
           red: {
             primary: '#D12D30',  // Main accent
             bright: '#E13C3E',   // CTAs
@@ -21,6 +22,7 @@ module.exports = {
           text: {
             primary: '#FAFAFA',
             secondary: '#B8B8B8',
+            muted: '#717171',
           }
         }
       },
