@@ -41,9 +41,10 @@ export default function MissionControl() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.tailwindcss.com?cache=bust-v2"></script>
         <script dangerouslySetInnerHTML={{__html: `
           tailwind.config = {
+            important: true,
             theme: {
               extend: {
                 fontFamily: {
@@ -77,7 +78,7 @@ export default function MissionControl() {
         `}} />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-brand-deepest via-brand-deep to-brand-elevated relative overflow-hidden">
+      <div className="min-h-screen relative overflow-hidden" style={{background: 'linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1C1C1C 100%)'}}>
         {/* Grain Overlay */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}}></div>
         
@@ -136,7 +137,7 @@ export default function MissionControl() {
 
           {/* ROW 2: Live Metrics (5 columns) */}
           <div className="grid grid-cols-5 gap-4 mb-6">
-            <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/40 transition-all shadow-lg">
+            <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/40 transition-all shadow-lg" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', borderColor: 'rgba(209, 45, 48, 0.2)'}}>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl">📋</span>
                 <span className="relative flex h-2.5 w-2.5">
@@ -144,9 +145,9 @@ export default function MissionControl() {
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-success"></span>
                 </span>
               </div>
-              <p className="text-brand-text-muted text-xs uppercase tracking-widest font-bold">PAR-Q Monitor</p>
-              <p className="text-3xl font-bold text-brand-text-primary mt-2">ACTIVE</p>
-              <p className="text-brand-text-secondary text-xs mt-3 font-mono">Every 5 min</p>
+              <p className="text-brand-text-muted text-xs uppercase tracking-widest font-bold" style={{color: '#717171'}}>PAR-Q Monitor</p>
+              <p className="text-3xl font-bold text-brand-text-primary mt-2" style={{color: '#FAFAFA'}}>ACTIVE</p>
+              <p className="text-brand-text-secondary text-xs mt-3 font-mono" style={{color: '#B8B8B8'}}>Every 5 min</p>
             </div>
 
             <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/40 transition-all shadow-lg">
