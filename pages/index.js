@@ -10,7 +10,17 @@ export default function MissionControl() {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch('/api/status');
+        const apiUrl = '/api/status';
+        console.log('Fetching:', apiUrl);
+        const res = await fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          cache: 'no-store'
+        });
+        console.log('Response status:', res.status);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         console.log('Data loaded:', data);
