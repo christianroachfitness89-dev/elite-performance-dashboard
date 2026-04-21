@@ -5,6 +5,7 @@
 /* ============================================
    ELITE PERFORMANCE BRAND GUIDELINES
    Christian Roach Fitness Coaching
+   Premium $50k Quality Design System
    ============================================ */
 
 :root {
@@ -12,6 +13,7 @@
   --brand-deepest: #0A0A0A;
   --brand-deep: #121212;
   --brand-elevated: #1C1C1C;
+  --brand-surface: #252525;
   
   /* Accent Reds */
   --brand-red-primary: #D12D30;
@@ -21,108 +23,297 @@
   /* Text */
   --brand-text-primary: #FAFAFA;
   --brand-text-secondary: #B8B8B8;
+  --brand-text-muted: #717171;
   
   /* Effects */
-  --glow-soft: 0 0 20px rgba(240, 76, 80, 0.3);
-  --glow-strong: 0 0 40px rgba(240, 76, 80, 0.5);
+  --glow-soft: 0 0 20px rgba(240, 76, 80, 0.15);
+  --glow-medium: 0 0 30px rgba(240, 76, 80, 0.25);
+  --glow-strong: 0 0 40px rgba(240, 76, 80, 0.4);
+  --glow-intense: 0 0 60px rgba(240, 76, 80, 0.6);
 }
 
 /* Base Styles - Dark Mode */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: var(--brand-deepest);
+  background: radial-gradient(ellipse at top, #1a1a1a 0%, var(--brand-deepest) 100%);
   color: var(--brand-text-primary);
-  font-family: 'Inter', 'Outfit', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Bebas Neue', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: var(--brand-text-primary);
+  margin: 0;
 }
 
-/* Brand Textures */
-.bg-carbon-fiber {
-  background-image: url('/textures/carbon-fiber.png');
-  background-size: cover;
+/* Animated Background Gradient */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+.bg-animated {
+  background: linear-gradient(-45deg, #0A0A0A, #121212, #1C1C1C, #0A0A0A);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Grain Overlay with Opacity */
 .bg-grain {
-  background-image: url('/textures/grain-overlay.png');
-  background-size: cover;
-  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
 }
 
-/* Brand Cards */
+/* Glassmorphism Cards - Premium */
 .card-elite {
-  background: var(--brand-deep);
-  border: 1px solid rgba(209, 45, 48, 0.2);
-  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(28, 28, 28, 0.6) 0%, rgba(18, 18, 18, 0.8) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(209, 45, 48, 0.15);
+  border-radius: 16px;
   padding: 1.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-elite::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(209, 45, 48, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .card-elite:hover {
-  border-color: var(--brand-red-primary);
-  box-shadow: var(--glow-soft);
+  border-color: rgba(209, 45, 48, 0.4);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    var(--glow-medium),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px);
 }
 
-/* Brand Buttons */
+.card-elite:hover::before {
+  opacity: 1;
+}
+
+/* Premium Buttons */
 .btn-elite {
-  background: var(--brand-red-primary);
+  background: linear-gradient(135deg, var(--brand-red-primary) 0%, var(--brand-red-bright) 100%);
   color: white;
   font-family: 'Bebas Neue', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 0.75rem 2rem;
-  border-radius: 4px;
+  letter-spacing: 0.12em;
+  padding: 0.875rem 2.5rem;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 16px rgba(209, 45, 48, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+}
+
+.btn-elite::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
 }
 
 .btn-elite:hover {
-  background: var(--brand-red-bright);
-  box-shadow: var(--glow-strong);
+  background: linear-gradient(135deg, var(--brand-red-bright) 0%, var(--brand-red-glow) 100%);
+  box-shadow: 
+    0 8px 24px rgba(240, 76, 80, 0.5),
+    var(--glow-strong);
   transform: translateY(-2px);
+}
+
+.btn-elite:hover::before {
+  left: 100%;
 }
 
 .btn-elite:active {
   transform: translateY(0);
+  box-shadow: 
+    0 2px 12px rgba(209, 45, 48, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Glow Effects */
+/* Glow Effects - Multiple Intensities */
 .glow-soft {
   box-shadow: var(--glow-soft);
+}
+
+.glow-medium {
+  box-shadow: var(--glow-medium);
 }
 
 .glow-strong {
   box-shadow: var(--glow-strong);
 }
 
-/* Text Gradients */
+.glow-intense {
+  box-shadow: var(--glow-intense);
+}
+
+/* Text Gradients - Premium */
 .text-gradient {
-  background: linear-gradient(135deg, var(--brand-red-primary), var(--brand-red-glow));
+  background: linear-gradient(135deg, var(--brand-red-primary) 0%, var(--brand-red-bright) 50%, var(--brand-red-glow) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  background-size: 200% auto;
+  animation: gradient-shift 5s ease infinite;
 }
 
-/* Border Glow */
+/* Border Glow - Animated */
 .border-glow {
   border: 1px solid var(--brand-red-primary);
-  box-shadow: 0 0 10px rgba(209, 45, 48, 0.3);
+  box-shadow: 
+    0 0 10px rgba(209, 45, 48, 0.3),
+    inset 0 0 20px rgba(209, 45, 48, 0.05);
+  position: relative;
+}
+
+.border-glow::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--brand-red-primary), var(--brand-red-glow));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
 }
 
 /* Utility Classes */
 .bg-deepest { background-color: var(--brand-deepest); }
 .bg-deep { background-color: var(--brand-deep); }
 .bg-elevated { background-color: var(--brand-elevated); }
+.bg-surface { background-color: var(--brand-surface); }
 
 .text-primary { color: var(--brand-text-primary); }
 .text-secondary { color: var(--brand-text-secondary); }
+.text-muted { color: var(--brand-text-muted); }
 
 .border-brand { border-color: var(--brand-red-primary); }
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--brand-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--brand-red-primary), var(--brand-red-bright));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--brand-red-bright), var(--brand-red-glow));
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-fade-in-delay-1 {
+  animation: fadeIn 0.6s ease-out 0.1s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fadeIn 0.6s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delay-3 {
+  animation: fadeIn 0.6s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+/* Pulse Animation for Status Indicators */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shimmer Effect for Loading States */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, var(--brand-elevated) 0%, var(--brand-surface) 50%, var(--brand-elevated) 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
