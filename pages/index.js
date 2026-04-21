@@ -55,6 +55,12 @@ export default function MissionControl() {
             }
           }
         `}} />
+        <style dangerouslySetInnerHTML={{__html: `
+          .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+          .custom-scrollbar::-webkit-scrollbar-track { background: rgba(28, 28, 28, 0.5); border-radius: 10px; }
+          .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(209, 45, 48, 0.3); border-radius: 10px; }
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(209, 45, 48, 0.5); }
+        `}} />
       </head>
 
       <div className="min-h-screen relative overflow-hidden" style={{background: 'linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1C1C1C 100%)'}}>
@@ -258,23 +264,6 @@ export default function MissionControl() {
           </div>
         </footer>
       </div>
-
-      <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(28, 28, 28, 0.5);
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(209, 45, 48, 0.3);
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(209, 45, 48, 0.5);
-        }
-      `}</style>
     </>
   );
 }
