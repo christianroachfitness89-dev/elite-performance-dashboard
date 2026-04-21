@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* ============================================
    ELITE PERFORMANCE BRAND GUIDELINES
@@ -8,28 +6,26 @@
    Premium $50k Quality Design System
    ============================================ */
 
-:root {
+@theme {
   /* Brand Colors - Dark Mode Elite */
-  --brand-deepest: #0A0A0A;
-  --brand-deep: #121212;
-  --brand-elevated: #1C1C1C;
-  --brand-surface: #252525;
+  --color-brand-deepest: #0A0A0A;
+  --color-brand-deep: #121212;
+  --color-brand-elevated: #1C1C1C;
+  --color-brand-surface: #252525;
   
   /* Accent Reds */
-  --brand-red-primary: #D12D30;
-  --brand-red-bright: #E13C3E;
-  --brand-red-glow: #F04C50;
+  --color-brand-red-primary: #D12D30;
+  --color-brand-red-bright: #E13C3E;
+  --color-brand-red-glow: #F04C50;
   
   /* Text */
-  --brand-text-primary: #FAFAFA;
-  --brand-text-secondary: #B8B8B8;
-  --brand-text-muted: #717171;
+  --color-brand-text-primary: #FAFAFA;
+  --color-brand-text-secondary: #B8B8B8;
+  --color-brand-text-muted: #717171;
   
-  /* Effects */
-  --glow-soft: 0 0 20px rgba(240, 76, 80, 0.15);
-  --glow-medium: 0 0 30px rgba(240, 76, 80, 0.25);
-  --glow-strong: 0 0 40px rgba(240, 76, 80, 0.4);
-  --glow-intense: 0 0 60px rgba(240, 76, 80, 0.6);
+  /* Fonts */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 /* Base Styles - Dark Mode */
@@ -38,8 +34,8 @@
 }
 
 body {
-  background: radial-gradient(ellipse at top, #1a1a1a 0%, var(--brand-deepest) 100%);
-  color: var(--brand-text-primary);
+  background: radial-gradient(ellipse at top, #1a1a1a 0%, #0A0A0A 100%);
+  color: var(--color-brand-text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
@@ -57,7 +53,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Bebas Neue', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--brand-text-primary);
+  color: var(--color-brand-text-primary);
   margin: 0;
 }
 
@@ -115,7 +111,7 @@ h1, h2, h3, h4, h5, h6 {
   border-color: rgba(209, 45, 48, 0.4);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.4),
-    var(--glow-medium),
+    0 0 30px rgba(240, 76, 80, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transform: translateY(-4px);
 }
@@ -126,7 +122,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Premium Buttons */
 .btn-elite {
-  background: linear-gradient(135deg, var(--brand-red-primary) 0%, var(--brand-red-bright) 100%);
+  background: linear-gradient(135deg, #D12D30 0%, #E13C3E 100%);
   color: white;
   font-family: 'Bebas Neue', sans-serif;
   text-transform: uppercase;
@@ -156,10 +152,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-elite:hover {
-  background: linear-gradient(135deg, var(--brand-red-bright) 0%, var(--brand-red-glow) 100%);
+  background: linear-gradient(135deg, #E13C3E 0%, #F04C50 100%);
   box-shadow: 
     0 8px 24px rgba(240, 76, 80, 0.5),
-    var(--glow-strong);
+    0 0 40px rgba(240, 76, 80, 0.4);
   transform: translateY(-2px);
 }
 
@@ -174,67 +170,28 @@ h1, h2, h3, h4, h5, h6 {
     inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Glow Effects - Multiple Intensities */
+/* Glow Effects */
 .glow-soft {
-  box-shadow: var(--glow-soft);
+  box-shadow: 0 0 20px rgba(240, 76, 80, 0.15);
 }
 
 .glow-medium {
-  box-shadow: var(--glow-medium);
+  box-shadow: 0 0 30px rgba(240, 76, 80, 0.25);
 }
 
 .glow-strong {
-  box-shadow: var(--glow-strong);
+  box-shadow: 0 0 40px rgba(240, 76, 80, 0.4);
 }
 
-.glow-intense {
-  box-shadow: var(--glow-intense);
-}
-
-/* Text Gradients - Premium */
+/* Text Gradient */
 .text-gradient {
-  background: linear-gradient(135deg, var(--brand-red-primary) 0%, var(--brand-red-bright) 50%, var(--brand-red-glow) 100%);
+  background: linear-gradient(135deg, #D12D30 0%, #E13C3E 50%, #F04C50 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   background-size: 200% auto;
   animation: gradient-shift 5s ease infinite;
 }
-
-/* Border Glow - Animated */
-.border-glow {
-  border: 1px solid var(--brand-red-primary);
-  box-shadow: 
-    0 0 10px rgba(209, 45, 48, 0.3),
-    inset 0 0 20px rgba(209, 45, 48, 0.05);
-  position: relative;
-}
-
-.border-glow::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--brand-red-primary), var(--brand-red-glow));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.5;
-}
-
-/* Utility Classes */
-.bg-deepest { background-color: var(--brand-deepest); }
-.bg-deep { background-color: var(--brand-deep); }
-.bg-elevated { background-color: var(--brand-elevated); }
-.bg-surface { background-color: var(--brand-surface); }
-
-.text-primary { color: var(--brand-text-primary); }
-.text-secondary { color: var(--brand-text-secondary); }
-.text-muted { color: var(--brand-text-muted); }
-
-.border-brand { border-color: var(--brand-red-primary); }
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
@@ -243,77 +200,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--brand-deep);
+  background: #121212;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--brand-red-primary), var(--brand-red-bright));
+  background: linear-gradient(180deg, #D12D30, #E13C3E);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--brand-red-bright), var(--brand-red-glow));
+  background: linear-gradient(180deg, #E13C3E, #F04C50);
 }
 
-/* Fade In Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-.animate-fade-in-delay-1 {
-  animation: fadeIn 0.6s ease-out 0.1s forwards;
-  opacity: 0;
-}
-
-.animate-fade-in-delay-2 {
-  animation: fadeIn 0.6s ease-out 0.2s forwards;
-  opacity: 0;
-}
-
-.animate-fade-in-delay-3 {
-  animation: fadeIn 0.6s ease-out 0.3s forwards;
-  opacity: 0;
-}
-
-/* Pulse Animation for Status Indicators */
+/* Pulse Animation */
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(0.95);
-  }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.95); }
 }
 
 .animate-pulse-slow {
   animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Shimmer Effect for Loading States */
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-.shimmer {
-  background: linear-gradient(90deg, var(--brand-elevated) 0%, var(--brand-surface) 50%, var(--brand-elevated) 100%);
-  background-size: 1000px 100%;
-  animation: shimmer 2s infinite;
 }
