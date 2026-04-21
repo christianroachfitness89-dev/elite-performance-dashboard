@@ -38,11 +38,18 @@ export default function MissionControl() {
       <Head>
         <title>Mission Control | Elite Performance AI</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         <script src="https://cdn.tailwindcss.com"></script>
         <script dangerouslySetInnerHTML={{__html: `
           tailwind.config = {
             theme: {
               extend: {
+                fontFamily: {
+                  display: ['Bebas Neue', 'sans-serif'],
+                  body: ['Inter', 'sans-serif']
+                },
                 colors: {
                   brand: {
                     deepest: '#0A0A0A',
@@ -70,9 +77,12 @@ export default function MissionControl() {
         `}} />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-brand-deepest via-brand-deep to-brand-elevated">
+      <div className="min-h-screen bg-gradient-to-br from-brand-deepest via-brand-deep to-brand-elevated relative overflow-hidden">
+        {/* Grain Overlay */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}}></div>
+        
         {/* Header */}
-        <header className="border-b border-brand-red-primary/20 bg-brand-deepest/90 backdrop-blur-xl sticky top-0 z-50">
+        <header className="relative z-10 border-b border-brand-red-primary/20 bg-brand-deepest/90 backdrop-blur-xl sticky top-0 z-50">
           <div className="container mx-auto px-8 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -80,8 +90,8 @@ export default function MissionControl() {
                   <span className="text-2xl">⚡</span>
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold tracking-wide bg-gradient-to-r from-brand-red-primary via-brand-red-bright to-brand-red-glow bg-clip-text text-transparent">MISSION CONTROL</h1>
-                  <p className="text-brand-text-secondary text-xs">Elite Performance AI • Live Operations</p>
+                  <h1 className="text-4xl font-display tracking-wide bg-gradient-to-r from-brand-red-primary via-brand-red-bright to-brand-red-glow bg-clip-text text-transparent">MISSION CONTROL</h1>
+                  <p className="text-brand-text-secondary text-xs font-body">Elite Performance AI • Live Operations</p>
                 </div>
               </div>
               <div className="flex items-center gap-6">
@@ -90,7 +100,7 @@ export default function MissionControl() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-success"></span>
                   </span>
-                  <span className="text-success text-xs font-bold tracking-wide">SYSTEMS ONLINE</span>
+                  <span className="text-success text-xs font-display tracking-wider">SYSTEMS ONLINE</span>
                 </div>
                 <div className="text-brand-text-muted text-xs font-mono">
                   {lastUpdate ? `LAST SYNC: ${lastUpdate.toLocaleTimeString('en-AU', { timeZone: 'Australia/Adelaide' })} ACDT` : 'LOADING...'}
@@ -108,7 +118,7 @@ export default function MissionControl() {
             <div className="mb-6 p-5 bg-brand-red-primary/10 border border-brand-red-primary/40 rounded-xl shadow-lg shadow-brand-red-primary/10">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-2xl">🚨</span>
-                <h2 className="text-lg font-bold text-brand-red-bright">CRITICAL ALERTS</h2>
+                <h2 className="text-lg font-display tracking-wide text-brand-red-bright">CRITICAL ALERTS</h2>
               </div>
               <div className="grid grid-cols-3 gap-4">
                 {status.critical_alerts.map((alert, idx) => (
@@ -189,10 +199,10 @@ export default function MissionControl() {
             <div className="col-span-2 bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/30 transition-all shadow-lg">
               <div className="flex items-center justify-between mb-5 pb-4 border-b border-brand-red-primary/20">
                 <div>
-                  <h3 className="text-xl font-bold text-brand-text-primary">📅 TOMORROW'S SCHEDULE</h3>
-                  <p className="text-brand-text-muted text-xs mt-1 font-mono">{status.calendar?.total_sessions || 0} SESSIONS • 5 AM - 9 PM ACDT</p>
+                  <h3 className="text-xl font-display tracking-wide text-brand-text-primary">📅 TOMORROW'S SCHEDULE</h3>
+                  <p className="text-brand-text-muted text-xs font-mono mt-1">{status.calendar?.total_sessions || 0} SESSIONS • 5 AM - 9 PM ACDT</p>
                 </div>
-                <span className="text-warning text-sm font-bold bg-warning/10 px-3 py-1 rounded-lg border border-warning/30">{status.calendar?.conflicts || 0} CONFLICTS</span>
+                <span className="text-warning text-sm font-display tracking-wide bg-warning/10 px-3 py-1 rounded-lg border border-warning/30">{status.calendar?.conflicts || 0} CONFLICTS</span>
               </div>
               <div className="space-y-2 max-h-96 overflow-y-auto">
                 {status.calendar?.sessions && status.calendar.sessions.length > 0 ? (
@@ -210,8 +220,8 @@ export default function MissionControl() {
             {/* RIGHT: Hot Leads */}
             <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/30 transition-all shadow-lg">
               <div className="mb-5 pb-4 border-b border-brand-red-primary/20">
-                <h3 className="text-xl font-bold text-brand-text-primary">🔥 HOT LEADS</h3>
-                <p className="text-brand-text-muted text-xs mt-1 font-mono">READY TO CONVERT</p>
+                <h3 className="text-xl font-display tracking-wide text-brand-text-primary">🔥 HOT LEADS</h3>
+                <p className="text-brand-text-muted text-xs font-mono mt-1">READY TO CONVERT</p>
               </div>
               <div className="space-y-3">
                 {status.leads && status.leads.length > 0 ? (
@@ -234,8 +244,8 @@ export default function MissionControl() {
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/30 transition-all shadow-lg">
               <div className="mb-5 pb-4 border-b border-brand-red-primary/20">
-                <h3 className="text-xl font-bold text-brand-text-primary">⚙️ AUTOMATION STATUS</h3>
-                <p className="text-brand-text-muted text-xs mt-1 font-mono">SCHEDULED TASKS</p>
+                <h3 className="text-xl font-display tracking-wide text-brand-text-primary">⚙️ AUTOMATION STATUS</h3>
+                <p className="text-brand-text-muted text-xs font-mono mt-1">SCHEDULED TASKS</p>
               </div>
               <div className="space-y-3">
                 {status.automations && status.automations.map((auto, idx) => (
@@ -255,8 +265,8 @@ export default function MissionControl() {
 
             <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/30 transition-all shadow-lg">
               <div className="mb-5 pb-4 border-b border-brand-red-primary/20">
-                <h3 className="text-xl font-bold text-brand-text-primary">⚡ QUICK ACTIONS</h3>
-                <p className="text-brand-text-muted text-xs mt-1 font-mono">EXECUTE OPERATIONS</p>
+                <h3 className="text-xl font-display tracking-wide text-brand-text-primary">⚡ QUICK ACTIONS</h3>
+                <p className="text-brand-text-muted text-xs font-mono mt-1">EXECUTE OPERATIONS</p>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <button className="p-5 bg-brand-deep/80 rounded-xl border border-brand-red-primary/10 hover:border-brand-red-primary/40 hover:bg-brand-red-primary/10 transition-all text-left group">
