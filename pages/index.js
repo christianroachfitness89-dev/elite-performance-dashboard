@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Dashboard() {
   return (
@@ -184,7 +185,7 @@ export default function Dashboard() {
                 </button>
                 <button className="w-full btn-elite text-left py-3 px-4 flex items-center gap-3">
                   <span className="text-xl">⚙️</span>
-                  <span>AI Agents Status</span>
+                  <Link href="/agents" className="flex-1">AI Agents Status</Link>
                 </button>
               </div>
             </div>
