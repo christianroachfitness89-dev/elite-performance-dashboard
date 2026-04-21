@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import '../styles/globals.css';
 
 export default function Dashboard() {
   const [data, setData] = useState(null);
