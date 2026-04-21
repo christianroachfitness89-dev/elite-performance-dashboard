@@ -91,8 +91,8 @@ export default function MissionControl() {
                   <span className="text-2xl">⚡</span>
                 </div>
                 <div>
-                  <h1 className="text-4xl font-display tracking-wide bg-gradient-to-r from-brand-red-primary via-brand-red-bright to-brand-red-glow bg-clip-text text-transparent">MISSION CONTROL</h1>
-                  <p className="text-brand-text-secondary text-xs font-body">Elite Performance AI • Live Operations</p>
+                  <h1 className="text-4xl font-display tracking-wide" style={{background: 'linear-gradient(135deg, #D12D30 0%, #E13C3E 50%, #F04C50 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'}}>MISSION CONTROL</h1>
+                  <p className="text-xs" style={{color: '#B8B8B8'}}>Elite Performance AI • Live Operations</p>
                 </div>
               </div>
               <div className="flex items-center gap-6">
@@ -116,18 +116,18 @@ export default function MissionControl() {
           
           {/* ROW 1: Critical Alerts */}
           {status.critical_alerts && status.critical_alerts.length > 0 && (
-            <div className="mb-6 p-5 bg-brand-red-primary/10 border border-brand-red-primary/40 rounded-xl shadow-lg shadow-brand-red-primary/10">
+            <div className="mb-6 p-5 rounded-xl" style={{backgroundColor: 'rgba(209, 45, 48, 0.1)', border: '1px solid rgba(209, 45, 48, 0.4)'}}>
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-2xl">🚨</span>
-                <h2 className="text-lg font-display tracking-wide text-brand-red-bright">CRITICAL ALERTS</h2>
+                <h2 className="text-lg font-display tracking-wide" style={{color: '#E13C3E'}}>CRITICAL ALERTS</h2>
               </div>
               <div className="grid grid-cols-3 gap-4">
                 {status.critical_alerts.map((alert, idx) => (
-                  <div key={idx} className="flex items-center gap-4 p-4 bg-brand-elevated/60 rounded-lg border border-brand-red-primary/30 hover:border-brand-red-bright/50 transition-all">
+                  <div key={idx} className="flex items-center gap-4 p-4 rounded-lg transition-all" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', border: '1px solid rgba(209, 45, 48, 0.3)'}}>
                     <span className="text-3xl">{alert.icon}</span>
                     <div>
-                      <p className="text-brand-red-bright text-sm font-bold">{alert.title}</p>
-                      <p className="text-brand-text-secondary/80 text-xs">{alert.message}</p>
+                      <p className="text-sm font-bold" style={{color: '#E13C3E'}}>{alert.title}</p>
+                      <p className="text-xs" style={{color: '#B8B8B8'}}>{alert.message}</p>
                     </div>
                   </div>
                 ))}
@@ -137,106 +137,106 @@ export default function MissionControl() {
 
           {/* ROW 2: Live Metrics (5 columns) */}
           <div className="grid grid-cols-5 gap-4 mb-6">
-            <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/40 transition-all shadow-lg" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', borderColor: 'rgba(209, 45, 48, 0.2)'}}>
+            <div className="p-5 rounded-xl transition-all shadow-lg" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', border: '1px solid rgba(209, 45, 48, 0.2)'}}>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl">📋</span>
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-success"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                 </span>
               </div>
-              <p className="text-brand-text-muted text-xs uppercase tracking-widest font-bold" style={{color: '#717171'}}>PAR-Q Monitor</p>
-              <p className="text-3xl font-bold text-brand-text-primary mt-2" style={{color: '#FAFAFA'}}>ACTIVE</p>
-              <p className="text-brand-text-secondary text-xs mt-3 font-mono" style={{color: '#B8B8B8'}}>Every 5 min</p>
+              <p className="text-xs uppercase tracking-widest font-bold" style={{color: '#717171'}}>PAR-Q Monitor</p>
+              <p className="text-3xl font-bold mt-2" style={{color: '#FAFAFA'}}>ACTIVE</p>
+              <p className="text-xs mt-3 font-mono" style={{color: '#B8B8B8'}}>Every 5 min</p>
             </div>
 
-            <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/40 transition-all shadow-lg">
+            <div className="p-5 rounded-xl transition-all shadow-lg" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', border: '1px solid rgba(209, 45, 48, 0.2)'}}>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl">💰</span>
-                <span className="h-2.5 w-2.5 rounded-full bg-success"></span>
+                <span className="h-2.5 w-2.5 rounded-full bg-green-500"></span>
               </div>
-              <p className="text-brand-text-muted text-xs uppercase tracking-widest font-bold">Revenue Today</p>
-              <p className="text-3xl font-bold text-success mt-2">${status.stripe?.revenue_dollars || '0.00'}</p>
-              <p className="text-brand-text-secondary text-xs mt-3 font-mono">{status.stripe?.successful_payments || 0} successful</p>
+              <p className="text-xs uppercase tracking-widest font-bold" style={{color: '#717171'}}>Revenue Today</p>
+              <p className="text-3xl font-bold mt-2" style={{color: '#10b981'}}>${status.stripe?.revenue_dollars || '0.00'}</p>
+              <p className="text-xs mt-3 font-mono" style={{color: '#B8B8B8'}}>{status.stripe?.successful_payments || 0} successful</p>
             </div>
 
-            <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/40 transition-all shadow-lg">
+            <div className="p-5 rounded-xl transition-all shadow-lg" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', border: '1px solid rgba(209, 45, 48, 0.2)'}}>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl">💳</span>
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-warning opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-warning"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-yellow-500"></span>
                 </span>
               </div>
-              <p className="text-brand-text-muted text-xs uppercase tracking-widest font-bold">Failed Payments</p>
-              <p className="text-3xl font-bold text-warning mt-2">{status.stripe?.failed_payments || 0}</p>
-              <p className="text-brand-text-secondary text-xs mt-3 font-mono">Need recovery</p>
+              <p className="text-xs uppercase tracking-widest font-bold" style={{color: '#717171'}}>Failed Payments</p>
+              <p className="text-3xl font-bold mt-2" style={{color: '#f59e0b'}}>{status.stripe?.failed_payments || 0}</p>
+              <p className="text-xs mt-3 font-mono" style={{color: '#B8B8B8'}}>Need recovery</p>
             </div>
 
-            <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/40 transition-all shadow-lg">
+            <div className="p-5 rounded-xl transition-all shadow-lg" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', border: '1px solid rgba(209, 45, 48, 0.2)'}}>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl">📅</span>
                 <span className="h-2.5 w-2.5 rounded-full bg-blue-500"></span>
               </div>
-              <p className="text-brand-text-muted text-xs uppercase tracking-widest font-bold">Tomorrow</p>
-              <p className="text-3xl font-bold text-brand-text-primary mt-2">{status.calendar?.total_sessions || 0}</p>
-              <p className="text-brand-text-secondary text-xs mt-3 font-mono">{status.calendar?.conflicts || 0} conflicts</p>
+              <p className="text-xs uppercase tracking-widest font-bold" style={{color: '#717171'}}>Tomorrow</p>
+              <p className="text-3xl font-bold mt-2" style={{color: '#FAFAFA'}}>{status.calendar?.total_sessions || 0}</p>
+              <p className="text-xs mt-3 font-mono" style={{color: '#B8B8B8'}}>{status.calendar?.conflicts || 0} conflicts</p>
             </div>
 
-            <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/40 transition-all shadow-lg">
+            <div className="p-5 rounded-xl transition-all shadow-lg" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', border: '1px solid rgba(209, 45, 48, 0.2)'}}>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl">📧</span>
-                <span className="h-2.5 w-2.5 rounded-full bg-brand-text-muted"></span>
+                <span className="h-2.5 w-2.5 rounded-full bg-gray-500"></span>
               </div>
-              <p className="text-brand-text-muted text-xs uppercase tracking-widest font-bold">Inbox</p>
-              <p className="text-3xl font-bold text-brand-text-primary mt-2">{status.email?.total_unread || 0}</p>
-              <p className="text-brand-text-secondary text-xs mt-3 font-mono">Unread</p>
+              <p className="text-xs uppercase tracking-widest font-bold" style={{color: '#717171'}}>Inbox</p>
+              <p className="text-3xl font-bold mt-2" style={{color: '#FAFAFA'}}>{status.email?.total_unread || 0}</p>
+              <p className="text-xs mt-3 font-mono" style={{color: '#B8B8B8'}}>Unread</p>
             </div>
           </div>
 
           {/* ROW 3: Main Content (2 columns - 60/40) */}
           <div className="grid grid-cols-3 gap-6 mb-6">
             {/* LEFT: Schedule */}
-            <div className="col-span-2 bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/30 transition-all shadow-lg">
-              <div className="flex items-center justify-between mb-5 pb-4 border-b border-brand-red-primary/20">
+            <div className="col-span-2 p-5 rounded-xl transition-all shadow-lg" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', border: '1px solid rgba(209, 45, 48, 0.2)'}}>
+              <div className="flex items-center justify-between mb-5 pb-4 border-b" style={{borderColor: 'rgba(209, 45, 48, 0.2)'}}>
                 <div>
-                  <h3 className="text-xl font-display tracking-wide text-brand-text-primary">📅 TOMORROW'S SCHEDULE</h3>
-                  <p className="text-brand-text-muted text-xs font-mono mt-1">{status.calendar?.total_sessions || 0} SESSIONS • 5 AM - 9 PM ACDT</p>
+                  <h3 className="text-xl font-display tracking-wide" style={{color: '#FAFAFA'}}>📅 TOMORROW'S SCHEDULE</h3>
+                  <p className="text-xs mt-1 font-mono" style={{color: '#717171'}}>{status.calendar?.total_sessions || 0} SESSIONS • 5 AM - 9 PM ACDT</p>
                 </div>
-                <span className="text-warning text-sm font-display tracking-wide bg-warning/10 px-3 py-1 rounded-lg border border-warning/30">{status.calendar?.conflicts || 0} CONFLICTS</span>
+                <span className="text-sm font-display tracking-wide px-3 py-1 rounded-lg border" style={{color: '#f59e0b', backgroundColor: 'rgba(245, 158, 11, 0.1)', borderColor: 'rgba(245, 158, 11, 0.3)'}}>{status.calendar?.conflicts || 0} CONFLICTS</span>
               </div>
               <div className="space-y-2 max-h-96 overflow-y-auto">
                 {status.calendar?.sessions && status.calendar.sessions.length > 0 ? (
                   status.calendar.sessions.map((session, idx) => (
-                    <div key={idx} className={`flex items-center gap-4 p-3 rounded-lg border ${session.conflict ? 'bg-warning/5 border-warning/30' : 'bg-brand-deep/80 border-brand-red-primary/10'}`}>
-                      <div className="w-24 text-brand-red-bright font-mono text-sm">{session.adelaide_time}</div>
-                      <div className="flex-1"><p className="text-brand-text-primary text-sm">{session.summary}</p></div>
-                      {session.conflict && <span className="text-xs bg-warning/20 text-warning px-3 py-1 rounded font-bold">⚠️ BUFFER</span>}
+                    <div key={idx} className={`flex items-center gap-4 p-3 rounded-lg border ${session.conflict ? '' : ''}`} style={{backgroundColor: session.conflict ? 'rgba(245, 158, 11, 0.05)' : 'rgba(18, 18, 18, 0.8)', borderColor: session.conflict ? 'rgba(245, 158, 11, 0.3)' : 'rgba(209, 45, 48, 0.1)'}}>
+                      <div className="w-24 font-mono text-sm" style={{color: '#E13C3E'}}>{session.adelaide_time}</div>
+                      <div className="flex-1"><p className="text-sm" style={{color: '#FAFAFA'}}>{session.summary}</p></div>
+                      {session.conflict && <span className="text-xs px-3 py-1 rounded font-bold" style={{backgroundColor: 'rgba(245, 158, 11, 0.2)', color: '#f59e0b'}}>⚠️ BUFFER</span>}
                     </div>
                   ))
-                ) : <p className="text-brand-text-muted text-sm text-center py-8">No sessions</p>}
+                ) : <p className="text-sm text-center py-8" style={{color: '#717171'}}>No sessions</p>}
               </div>
             </div>
 
             {/* RIGHT: Hot Leads */}
-            <div className="bg-brand-elevated/60 p-5 rounded-xl border border-brand-red-primary/20 hover:border-brand-red-primary/30 transition-all shadow-lg">
-              <div className="mb-5 pb-4 border-b border-brand-red-primary/20">
-                <h3 className="text-xl font-display tracking-wide text-brand-text-primary">🔥 HOT LEADS</h3>
-                <p className="text-brand-text-muted text-xs font-mono mt-1">READY TO CONVERT</p>
+            <div className="p-5 rounded-xl transition-all shadow-lg" style={{backgroundColor: 'rgba(28, 28, 28, 0.6)', border: '1px solid rgba(209, 45, 48, 0.2)'}}>
+              <div className="mb-5 pb-4 border-b" style={{borderColor: 'rgba(209, 45, 48, 0.2)'}}>
+                <h3 className="text-xl font-display tracking-wide" style={{color: '#FAFAFA'}}>🔥 HOT LEADS</h3>
+                <p className="text-xs mt-1 font-mono" style={{color: '#717171'}}>READY TO CONVERT</p>
               </div>
               <div className="space-y-3">
                 {status.leads && status.leads.length > 0 ? (
                   status.leads.slice(0, 5).map((lead, idx) => (
-                    <div key={idx} className="p-4 bg-brand-deep/80 rounded-lg border border-brand-red-primary/10 hover:border-brand-red-primary/40 transition-all cursor-pointer">
+                    <div key={idx} className="p-4 rounded-lg border transition-all cursor-pointer" style={{backgroundColor: 'rgba(18, 18, 18, 0.8)', borderColor: 'rgba(209, 45, 48, 0.1)'}}>
                       <div className="flex items-center justify-between mb-2">
-                        <p className="text-brand-text-primary font-bold text-sm">{lead.name}</p>
-                        <span className={`text-xs font-bold px-2 py-1 rounded ${lead.score >= 90 ? 'bg-brand-red-primary/20 text-brand-red-bright' : lead.score >= 70 ? 'bg-warning/20 text-warning' : 'bg-yellow-500/20 text-yellow-400'}`}>{lead.score}</span>
+                        <p className="font-bold text-sm" style={{color: '#FAFAFA'}}>{lead.name}</p>
+                        <span className="text-xs font-bold px-2 py-1 rounded" style={{backgroundColor: lead.score >= 90 ? 'rgba(209, 45, 48, 0.2)' : lead.score >= 70 ? 'rgba(245, 158, 11, 0.2)' : 'rgba(250, 204, 21, 0.2)', color: lead.score >= 90 ? '#E13C3E' : lead.score >= 70 ? '#f59e0b' : '#facc15'}}>{lead.score}</span>
                       </div>
-                      <p className="text-brand-text-secondary text-xs mb-2">{lead.goal}</p>
-                      {lead.phone && <p className="text-brand-text-muted text-xs font-mono">📞 {lead.phone}</p>}
+                      <p className="text-xs mb-2" style={{color: '#B8B8B8'}}>{lead.goal}</p>
+                      {lead.phone && <p className="text-xs font-mono" style={{color: '#717171'}}>📞 {lead.phone}</p>}
                     </div>
                   ))
-                ) : <p className="text-brand-text-muted text-sm text-center py-8">No hot leads</p>}
+                ) : <p className="text-sm text-center py-8" style={{color: '#717171'}}>No hot leads</p>}
               </div>
             </div>
           </div>
