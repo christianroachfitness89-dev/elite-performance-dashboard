@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useState, useEffect } from 'react';
 
 export default function MissionControl() {
@@ -40,37 +41,49 @@ export default function MissionControl() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1C1C1C 100%)'}}>
-        <div className="text-center">
-          <div className="w-16 h-16 rounded-full border-4 border-red-500/30 border-t-red-500 animate-spin mx-auto mb-4"></div>
-          <p className="text-sm font-mono" style={{color: '#B8B8B8'}}>LOADING DATA...</p>
+      <>
+        <Head>
+          <title>Loading... | Mission Control</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <div className="min-h-screen flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1C1C1C 100%)'}}>
+          <div className="text-center">
+            <div className="w-16 h-16 rounded-full border-4 border-red-500/30 border-t-red-500 animate-spin mx-auto mb-4"></div>
+            <p className="text-sm font-mono" style={{color: '#B8B8B8'}}>LOADING DATA...</p>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1C1C1C 100%)'}}>
-        <div className="text-center">
-          <p className="text-2xl mb-4">⚠️</p>
-          <p className="text-red-500 font-mono mb-4">ERROR: {error}</p>
-          <p className="text-sm" style={{color: '#717171'}}>Check browser console for details</p>
+      <>
+        <Head>
+          <title>Error | Mission Control</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <div className="min-h-screen flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1C1C1C 100%)'}}>
+          <div className="text-center">
+            <p className="text-2xl mb-4">⚠️</p>
+            <p className="text-red-500 font-mono mb-4">ERROR: {error}</p>
+            <p className="text-sm" style={{color: '#717171'}}>Check browser console for details</p>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
     <>
-      <head>
+      <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Mission Control | Elite Performance AI</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.tailwindcss.com" />
         <script dangerouslySetInnerHTML={{__html: `
           tailwind.config = {
             theme: {
@@ -90,7 +103,7 @@ export default function MissionControl() {
           .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(209, 45, 48, 0.3); border-radius: 10px; }
           .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(209, 45, 48, 0.5); }
         `}} />
-      </head>
+      </Head>
 
       <div className="min-h-screen relative overflow-hidden" style={{background: 'linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1C1C1C 100%)'}}>
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`}}></div>
